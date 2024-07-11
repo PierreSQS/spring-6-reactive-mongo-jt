@@ -3,11 +3,11 @@ package guru.springframework.reactivemongo.services;
 import guru.springframework.reactivemongo.domain.Beer;
 import guru.springframework.reactivemongo.mappers.BeerMapper;
 import guru.springframework.reactivemongo.model.BeerDTO;
-import guru.springframework.reactivemongo.repositories.BeerRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
 
@@ -18,7 +18,7 @@ class BeerServiceImplTest {
     BeerMapper beerMapper;
 
     @Autowired
-    BeerRepository beerRepository;
+    BeerService beerService;
 
     BeerDTO beerDTO;
 
@@ -29,6 +29,11 @@ class BeerServiceImplTest {
 
     @Test
     void saveBeer() {
+        Mono<BeerDTO> beerDTOSavedMono = beerService.saveBeer(Mono.just(beerDTO));
+
+        beerDTOSavedMono.subscribe(beerDTO1 -> {
+            System.out.println(beerDTO1.getId());
+        });
     }
 
     public static Beer getTestBeer() {
