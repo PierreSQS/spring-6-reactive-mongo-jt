@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
@@ -33,6 +34,23 @@ class BeerServiceImplTest {
     void setUp() {
         beerDTO = beerMapper.beerToBeerDto(getTestBeer());
     }
+
+    @Test
+    void findFirstByBeerStyleTest() {
+        BeerDTO beerDto = getSavedBeerDto();
+
+        AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+        Flux<BeerDTO> foundDtos = beerService.findByBeerStyle(beerDto.getBeerStyle());
+
+        foundDtos.subscribe(dto -> {
+            System.out.println(dto.toString());
+            atomicBoolean.set(true);
+        });
+
+        await().untilTrue(atomicBoolean);
+
+    }
+
 
     @Test
     void findFirstByBeerNameTest() {
