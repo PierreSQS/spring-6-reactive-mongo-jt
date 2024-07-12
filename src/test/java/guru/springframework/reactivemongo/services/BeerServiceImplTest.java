@@ -31,8 +31,8 @@ class BeerServiceImplTest {
     void saveBeer() {
         Mono<BeerDTO> beerDTOSavedMono = beerService.saveBeer(Mono.just(beerDTO));
 
-        beerDTOSavedMono.subscribe(beerDTO1 -> {
-            System.out.println(beerDTO1.getId());
+        beerDTOSavedMono.subscribe(savedDto -> {
+            System.out.println(savedDto.getId());
         });
     }
 

@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 public class Beer {
 
     @Id
-    private Integer id;
+    private String id;
     private String beerName;
     private String beerStyle;
     private String upc;
