@@ -28,12 +28,14 @@ class BeerServiceImplTest {
     }
 
     @Test
-    void saveBeer() {
+    void saveBeer() throws InterruptedException {
         Mono<BeerDTO> beerDTOSavedMono = beerService.saveBeer(Mono.just(beerDTO));
 
         beerDTOSavedMono.subscribe(savedDto -> {
             System.out.println(savedDto.getId());
         });
+
+        Thread.sleep(1000L);
     }
 
     public static Beer getTestBeer() {
