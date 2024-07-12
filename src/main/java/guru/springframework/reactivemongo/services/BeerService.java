@@ -1,10 +1,22 @@
 package guru.springframework.reactivemongo.services;
 
 import guru.springframework.reactivemongo.model.BeerDTO;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+/**
+ * Created by Pierrot, on 12-07-2024.
+ */
 public interface BeerService {
-    Mono<BeerDTO> saveBeer(Mono<BeerDTO> beerDTOMono);
+    Flux<BeerDTO> listBeers();
+    Mono<BeerDTO> saveBeer(Mono<BeerDTO> beerDto);
 
-    Mono<BeerDTO> getBeerByID(String beerID);
+    Mono<BeerDTO> saveBeer(BeerDTO beerDTO);
+    Mono<BeerDTO> getById(String beerId);
+
+    Mono<BeerDTO> updateBeer(String beerId, BeerDTO beerDTO);
+
+    Mono<BeerDTO> patchBeer(String beerId, BeerDTO beerDTO);
+
+    Mono<Void> deleteBeerById(String beerId);
 }
