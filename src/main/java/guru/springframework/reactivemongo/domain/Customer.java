@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 @Document
 public class Customer {
     @Id
-    private Integer id;
+    private String id;
 
     @Size(max = 255)
     private String customerName;
