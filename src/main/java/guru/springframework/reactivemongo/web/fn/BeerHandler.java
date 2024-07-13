@@ -14,6 +14,11 @@ public class BeerHandler {
 
     private final BeerService beerService;
 
+    Mono<ServerResponse> getBeerByID(ServerRequest serverRequest) {
+        return ServerResponse.ok()
+                .body(beerService.getById(serverRequest.pathVariable("beerID")) , BeerDTO.class);
+    }
+
     public Mono<ServerResponse> listBeers(ServerRequest serverRequest) {
         return ServerResponse.ok()
                 .body(beerService.listBeers(), BeerDTO.class);
