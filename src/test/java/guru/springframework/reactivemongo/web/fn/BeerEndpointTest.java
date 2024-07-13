@@ -14,8 +14,6 @@ import org.springframework.test.web.reactive.server.FluxExchangeResult;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
-
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasSize;
 
@@ -160,7 +158,7 @@ class BeerEndpointTest {
                 .exchange()
                 .returnResult(BeerDTO.class);
 
-        List<String> location = beerDTOFluxExchangeResult.getResponseHeaders().get("Location");
+        beerDTOFluxExchangeResult.getResponseHeaders().get("Location");
 
         return webTestClient.get().uri(BeerRouterConfig.BEER_PATH)
                 .exchange().returnResult(BeerDTO.class).getResponseBody().blockFirst();
