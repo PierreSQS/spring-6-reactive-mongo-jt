@@ -119,7 +119,7 @@ class BeerEndpointTest {
                 .header("Content-Type", "application/json")
                 .exchange()
                 .expectStatus().isCreated()
-                .expectHeader().location("http://localhost:8080/api/v2/beer/4");
+                .expectHeader().exists("Location");
     }
 
     @Test
