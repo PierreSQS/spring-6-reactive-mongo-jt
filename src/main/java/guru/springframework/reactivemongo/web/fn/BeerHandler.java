@@ -55,8 +55,8 @@ public class BeerHandler {
 
     public Mono<ServerResponse> getBeerByID(ServerRequest serverRequest) {
         return ServerResponse.ok()
-                .body(beerService.getById(serverRequest.pathVariable(BEER_ID_PATH_VAR)) , BeerDTO.class)
-                .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)));
+                .body(beerService.getById(serverRequest.pathVariable(BEER_ID_PATH_VAR))
+                        .switchIfEmpty(Mono.error(() -> new ResponseStatusException(HttpStatus.NOT_FOUND))), BeerDTO.class);
     }
 
     public Mono<ServerResponse> listBeers(ServerRequest serverRequest) {
