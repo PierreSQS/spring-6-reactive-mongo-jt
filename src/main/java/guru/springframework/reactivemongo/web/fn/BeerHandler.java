@@ -16,19 +16,25 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class BeerHandler {
 
+    public static final String BEER_ID_PATH_VAR = "beerID";
     private final BeerService beerService;
+
+    public Mono<ServerResponse> deleteBeerByID(ServerRequest serverRequest) {
+        return beerService.deleteBeerById(serverRequest.pathVariable(BEER_ID_PATH_VAR))
+                .then(ServerResponse.noContent().build());
+        }
 
     public Mono<ServerResponse> patchBeerByID(ServerRequest serverRequest) {
         return serverRequest.bodyToMono(BeerDTO.class)
                 .flatMap(beerDTO -> beerService
-                        .patchBeer(serverRequest.pathVariable("beerID"), beerDTO))
+                        .patchBeer(serverRequest.pathVariable(BEER_ID_PATH_VAR), beerDTO))
                 .flatMap(savedDTO -> ServerResponse.noContent().build());
     }
 
     public Mono<ServerResponse> updateBeerByID(ServerRequest serverRequest) {
         return serverRequest.bodyToMono(BeerDTO.class)
                 .flatMap(beerDTO -> beerService
-                        .updateBeer(serverRequest.pathVariable("beerID"), beerDTO))
+                        .updateBeer(serverRequest.pathVariable(BEER_ID_PATH_VAR), beerDTO))
                 .flatMap(savedDTO -> ServerResponse.noContent().build());
     }
 
@@ -43,7 +49,7 @@ public class BeerHandler {
 
     public Mono<ServerResponse> getBeerByID(ServerRequest serverRequest) {
         return ServerResponse.ok()
-                .body(beerService.getById(serverRequest.pathVariable("beerID")) , BeerDTO.class);
+                .body(beerService.getById(serverRequest.pathVariable(BEER_ID_PATH_VAR)) , BeerDTO.class);
     }
 
     public Mono<ServerResponse> listBeers(ServerRequest serverRequest) {
