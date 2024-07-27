@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
- * Created by jt, Spring Framework Guru.
+ * Modified by Pierrot on 27.07.2024.
  */
 @Component
 @RequiredArgsConstructor
@@ -22,11 +22,9 @@ public class BootstrapData implements CommandLineRunner {
     private final CustomerRepository customerRepository;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         beerRepository.deleteAll()
-                .doOnSuccess(success -> {
-                    loadBeerData();
-                }).subscribe();
+                .doOnSuccess(success -> loadBeerData()).subscribe();
 
         customerRepository.deleteAll()
                 .doOnSuccess(success -> loadCustomerData())
