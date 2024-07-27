@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>guru.springframework</groupId>
-    <artifactId>reactive-mongo</artifactId>
+    <artifactId>spring-6-reactive-mongo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-6-reactive-mongo</name>
     <description>spring-6-reactive-mongo</description>
