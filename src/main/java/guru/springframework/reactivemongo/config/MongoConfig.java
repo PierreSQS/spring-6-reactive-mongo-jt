@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.config.AbstractReactiveMongoConfiguratio
 import static java.util.Collections.singletonList;
 
 /**
- * Created by jt, Spring Framework Guru.
+ * Modified by Pierrot on 28.07.2024.
  */
 @Configuration
 public class MongoConfig extends AbstractReactiveMongoConfiguration {
@@ -31,11 +31,9 @@ public class MongoConfig extends AbstractReactiveMongoConfiguration {
     protected void configureClientSettings(MongoClientSettings.Builder builder) {
         builder.credential(MongoCredential.createCredential("root",
                 "admin", "example".toCharArray()))
-                .applyToClusterSettings(settings -> {
-                    settings.hosts((singletonList(
-                            new ServerAddress("127.0.0.1", 27017)
-                    )));
-                });
+                .applyToClusterSettings(settings -> settings.hosts((singletonList(
+                        new ServerAddress("127.0.0.1", 27017)
+                ))));
     }
 }
 

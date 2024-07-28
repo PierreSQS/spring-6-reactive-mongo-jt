@@ -10,7 +10,7 @@ import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
 /**
- * Created by jt, Spring Framework Guru.
+ * Modified by Pierrot on 28.07.2024.
  */
 @Configuration
 @EnableWebFluxSecurity
@@ -18,7 +18,7 @@ public class SpringSecConfig {
 
     @Bean
     @Order(1)
-    public SecurityWebFilterChain actutatorSecurityFilterChain(ServerHttpSecurity http) throws Exception {
+    public SecurityWebFilterChain actutatorSecurityFilterChain(ServerHttpSecurity http) {
         http.securityMatcher(EndpointRequest.toAnyEndpoint())
                 .authorizeExchange(authorize -> authorize.anyExchange().permitAll());
 
