@@ -126,9 +126,7 @@ public class BeerServiceImplTest {
                 })
                 .flatMap(beerService::saveBeer) // save updated beer
                 .flatMap(savedUpdatedDto -> beerService.getById(savedUpdatedDto.getId())) // get from db
-                .subscribe(dtoFromDb -> {
-                    atomicDto.set(dtoFromDb);
-                });
+                .subscribe(dtoFromDb -> atomicDto.set(dtoFromDb));
 
         await().until(() -> atomicDto.get() != null);
         assertThat(atomicDto.get().getBeerName()).isEqualTo(newName);

@@ -155,9 +155,10 @@ class CustomerEndpointTest {
 
         List<String> location = beerDTOFluxExchangeResult.getResponseHeaders().get("Location");
 
+        assert location != null;
         return webTestClient
                 .mutateWith(mockOAuth2Login())
-                .get().uri(location.get(0))
+                .get().uri(location.getFirst())
                 .exchange().returnResult(CustomerDTO.class).getResponseBody().blockFirst();
     }
 
